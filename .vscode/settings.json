@@ -1,0 +1,24 @@
+{
+    // "terminal.integrated.shellArgs.windows": [
+    //     "PowerShell -ExecutionPolicy ByPass -NoExit -File C:\\users\\cobas\\Anaconda3\\shell\\condabin\\conda-hook.ps1"
+    //  ]
+    // "python.terminal.executeInFileDir": true,
+    // "code-runner.fileDirectoryAsCwd": true
+
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+          "path": "pwsh.exe",
+          "args": [
+             "-ExecutionPolicy",
+             "ByPass",
+             "-NoExit",
+             "-File",
+             "C:\\users\\cobas\\Anaconda3\\shell\\condabin\\conda-hook.ps1"
+          ]
+        }
+        
+      },
+      "terminal.integrated.defaultProfile.windows": "PowerShell",
+      "terminal.integrated.cwd": "${fileDirname}",
+      "python.terminal.executeInFileDir": true
+}
