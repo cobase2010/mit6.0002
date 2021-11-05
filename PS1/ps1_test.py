@@ -3,6 +3,7 @@
 import unittest
 import string
 from ps1a import *
+from ps1b import *
 
 class ProblemSet1(unittest.TestCase):
     def setUp(self):
@@ -51,9 +52,28 @@ class ProblemSet1(unittest.TestCase):
         print(transport_list)
 
         self.assertEqual(res, len(transport_list))
+class ProblemSet2(unittest.TestCase):
+    def setUp(self):
+        print('\n')
+        pass
+
+    def test_dp_make_weight1(self):
+        egg_weights = (1, 5, 10, 25)
+        n = 99
+        print("Egg weights = ", egg_weights)
+        print("n = ", n)
+        self.assertEqual(9, dp_make_weight(egg_weights, n))
+    def test_dp_make_weight1(self):
+        egg_weights = (1, 5, 10, 25, 50)
+        n = 199
+        print("Egg weights = ", egg_weights)
+        print("n = ", n)
+        self.assertEqual(10, dp_make_weight(egg_weights, n))
+
 
 
 if __name__ == "__main__":
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(ProblemSet1))
+    suite.addTest(unittest.makeSuite(ProblemSet2))
     unittest.TextTestRunner(verbosity=2).run(suite)

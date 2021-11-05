@@ -87,7 +87,7 @@ def greedy_cow_transport(cows,limit=10):
     return sorted_cows
     
 # Problem 3
-def brute_force_cow_transport(cows,limit=10):
+def brute_force_cow_transport2(cows,limit=10):
     """
     Finds the allocation of cows that minimizes the number of spaceship trips
     via brute force.  The brute force algorithm should follow the following method:
@@ -125,6 +125,7 @@ def brute_force_cow_transport(cows,limit=10):
 
     for i in range(1, len(cows.keys())+1):
         # testing each 1 trip, 2 trips, etc.
+        print("Testing ", i, "trips...")
         
         for trips in dict[i]:
             
@@ -138,9 +139,50 @@ def brute_force_cow_transport(cows,limit=10):
             if valid:
                 #found a good trips
                 return trips
+    
     return [[]] #no trips found
 
+def brute_force_cow_transport(cows,limit=10):
+    """
+    Finds the allocation of cows that minimizes the number of spaceship trips
+    via brute force.  The brute force algorithm should follow the following method:
+
+    1. Enumerate all possible ways that the cows can be divided into separate trips 
+        Use the given get_partitions function in ps1_partition.py to help you!
+    2. Select the allocation that minimizes the number of trips without making any trip
+        that does not obey the weight limitation
             
+    Does not mutate the given dictionary of cows.
+
+    Parameters:
+    cows - a dictionary of name (string), weight (int) pairs
+    limit - weight limit of the spaceship (an int)
+    
+    Returns:
+    A list of lists, with each inner list containing the names of cows
+    transported on a particular trip and the overall list containing all the
+    trips
+    """
+    # Your code here
+    min_trips = 10
+    trips = []
+    
+    for partition in get_partitions(cows.keys()):
+    # for partition in get_partitions(['one','two','three']):
+            # for each partition, test to see if they are under total weight
+            valid = True
+            for trip in partition:
+                cost = 0
+                for cow in trip:
+                    cost += cows[cow]
+                if cost > limit: # broke it
+                    valid = False
+            if valid: #if under total weight, check if the length is smaller than the stored one
+                if len(partition) < min_trips:
+                    min_trips = len(partition)
+                    trips = partition.copy()
+
+    return trips       
 
 
         
@@ -176,6 +218,14 @@ def compare_cow_transport_algorithms():
     transport_list = brute_force_cow_transport(dict, 10)    
     end = time.time_ns()
     print("Number of trips found by brute_force", len(transport_list))
+    print("brute_force_transport took:", "{:.4f}".format((end - start)/1000000), "ms.")
+    print(transport_list)
+
+    start = time.time_ns()
+
+    transport_list = brute_force_cow_transport2(dict, 10)    
+    end = time.time_ns()
+    print("Number of trips found by brute_force 2", len(transport_list))
     print("brute_force_transport took:", "{:.4f}".format((end - start)/1000000), "ms.")
     print(transport_list)
 
