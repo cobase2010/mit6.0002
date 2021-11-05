@@ -2,6 +2,7 @@
 # Problem Set 5 Test Suite
 import unittest
 import string
+import sys
 from ps1a import *
 from ps1b import *
 
@@ -63,17 +64,30 @@ class ProblemSet2(unittest.TestCase):
         print("Egg weights = ", egg_weights)
         print("n = ", n)
         self.assertEqual(9, dp_make_weight(egg_weights, n))
-    def test_dp_make_weight1(self):
-        egg_weights = (1, 5, 10, 25, 50)
-        n = 199
+    def test_dp_make_weight2(self):
+        egg_weights = (1, 5, 10, 25, 40, 45, 75, 100, 150, 200, 300, 450, 540, 610, 780, 
+        910, 1100, 2300, 3400, 4500, 5000, 5500, 6000, 6500, 7000, 10000, 12500, 15000, 20000, 30000)
+        
+        n = 1000001
         print("Egg weights = ", egg_weights)
         print("n = ", n)
-        self.assertEqual(10, dp_make_weight(egg_weights, n))
+        self.assertEqual(35, dp_make_weight(egg_weights, n))
+    
+    def test_dp_make_weight3(self):
+        egg_weights = (2, 5)
+        
+        n = 6
+        print("Egg weights = ", egg_weights)
+        print("n = ", n)
+        self.assertEqual(3, dp_make_weight(egg_weights, n))
+    
 
 
 
 if __name__ == "__main__":
+    # sys.setrecursionlimit(15000)
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(ProblemSet1))
     suite.addTest(unittest.makeSuite(ProblemSet2))
     unittest.TextTestRunner(verbosity=2).run(suite)
+
