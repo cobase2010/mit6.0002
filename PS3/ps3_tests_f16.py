@@ -86,6 +86,7 @@ class ps3_P1A(unittest.TestCase):
                             "Clean tile {} was not marked clean".format((x, y))
                             )
 
+
     def test_clean_tile_at_position_PosToPos(self):
         """ Test if clean_tile_at_position removes all dirt"""
         width, height, dirt_amount = (3, 4, 2)
